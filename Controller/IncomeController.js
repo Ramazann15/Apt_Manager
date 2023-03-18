@@ -1,18 +1,20 @@
 const Income = require("../Model/Income");
+const mongoose = require('mongoose');
 
 const now = new Date().toLocaleDateString();
-
+const month  = new Date().getMonth() + 1;
 
 exports.addIncome = async (req,res)=>{
 
-    const month  = new Date().getMonth() + 1;
+    
 
+    //gelen veriler db ye eklendi
     const income = await Income.create(
         {
             receiver:req.body.receiver,
-            bringer:req.body.personid,
+            bringer:req.body.person,
             amount:req.body.amount,
-            income_date:now,
+            date:now,
             bringerMonth : month
 
         }

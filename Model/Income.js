@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const IncomeSchema = new schema({
-    income_date:{
+    date:{
         type:String,
         default:Date.now,
     },
     bringer:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:String,
         required : true,
         ref: 'Person',
     },
@@ -28,6 +28,7 @@ const IncomeSchema = new schema({
 
    
 })
+
 
 const Income = mongoose.model("Income",IncomeSchema);
 module.exports = Income;
