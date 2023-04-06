@@ -44,7 +44,6 @@ exports.lastestProcess = async  (req,res)=>{
 
     delete lastestProcess;
 
-    console.log(lastestProcess)
     res.send(JSON.stringify(lastestProcess))
 
 }

@@ -18,7 +18,8 @@ const PersonSchema = new schema({
     fee_to_pay:{
         type:String,
         required : true,
-    }
+    },
+
 })
 
 const Person = mongoose.model("Person",PersonSchema);

@@ -9,25 +9,31 @@ const ExpenseRouter = require("./Router/ExpenseRouter")
 const IncomeRouter = require("./Router/IncomeRouter")
 const TotalAmountController = require("./Router/TotalAmount")
 const LastestRouter = require("./Router/LastestRouter")
+const GetPDFRouter = require("./Router/GetPDFRouter")
+const AuthorizationRoter = require("./Router/AuthorizationRoter")
+const Cron = require("./Cron")
 
 const app = express();
 
+
 DatabaseConnect.connectDatabase();
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+Cron.startCronJob();
 
+global.name = " "
+// app.get("/hebele",hebelehubele.startCronJob)
+app.use("/",AuthorizationRoter)
+app.use("/person",validator.Authorization,PersonRouter);
+app.use("/expense",validator.Authorization,validator.validateExpense,ExpenseRouter);
+app.use("/income",validator.Authorization,validator.validateIncome,IncomeRouter);
+app.use("/totalamount",validator.Authorization,TotalAmountController);
+app.use("/lastest",validator.Authorization,LastestRouter);
+app.use("/getPDF",validator.Authorization,GetPDFRouter)
 
-app.get("/",(req,res)=>{
-    res.send("Hello World");
-})
-
-app.use("/person",PersonRouter);
-app.use("/expense",validator.validateExpense,ExpenseRouter);
-app.use("/income",validator.validateIncome,IncomeRouter);
-app.use("/totalamount",TotalAmountController);
-app.use("/lastest",LastestRouter);
 
 app.listen(3000);
 

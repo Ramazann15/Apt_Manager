@@ -27,10 +27,11 @@ const ExpenseSchema = new schema({
         type: Map,
         of: Number
     },
-    bringerMonth:{
+    ExpenseMonth:{
         type:String,
         required : true,
-    }
+    },
+    
 
 
 })

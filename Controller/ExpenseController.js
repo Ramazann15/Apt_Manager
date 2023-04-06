@@ -11,7 +11,7 @@ exports.addExpense =async  (req,res)=>{
             electricity_bill : req.body.electricity_bill,
             elevator_maintenance : req.body.elevator_maintenance,
             total : req.body.total,
-            bringerMonth : month,
+            ExpenseMonth : req.body.ExpenseMonth,
             amount_collected : req.body.amount_collected,
             date: now,
             extra_expenses : req.body.extra_expenses
@@ -19,11 +19,11 @@ exports.addExpense =async  (req,res)=>{
         });
         res.status(201);
         res.send(JSON.stringify(expense))
-        console.log(expense);
-        delete now,month
+
+      
     }
     catch(error){
-        console.log(error);
+        res.send(JSON.stringify(error))
     }
 }
 

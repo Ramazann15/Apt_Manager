@@ -24,6 +24,14 @@ const IncomeSchema = new schema({
     bringerMonth:{
         type:String,
         required : true,
+    },
+    fee_to_pay:{
+        type:String,
+        required : true,
+    },
+    isBring:{
+        type:Boolean,
+        required : true,
     }
 
    
