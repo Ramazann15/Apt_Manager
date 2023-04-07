@@ -1,4 +1,5 @@
 const express = require("express");
+
 require('dotenv').config()
 
 const validator = require("./Middlewares/Validator")
@@ -25,8 +26,12 @@ app.use(express.urlencoded({ extended: true }));
 Cron.startCronJob();
 
 global.name = " "
-// app.get("/hebele",hebelehubele.startCronJob)
-app.use("/",AuthorizationRoter)
+
+app.get("/",(req,res)=>{
+    res.send("Hello :)")
+})
+
+app.use("/auth",AuthorizationRoter)
 app.use("/person",validator.Authorization,PersonRouter);
 app.use("/expense",validator.Authorization,validator.validateExpense,ExpenseRouter);
 app.use("/income",validator.Authorization,validator.validateIncome,IncomeRouter);
@@ -35,6 +40,8 @@ app.use("/lastest",validator.Authorization,LastestRouter);
 app.use("/getPDF",validator.Authorization,GetPDFRouter)
 
 
-app.listen(3000);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server run On port ${port}`);
+});
 
-console.log("Server run 3000 Port");
