@@ -20,7 +20,8 @@ exports.Login = async (req,res)=>{
             })
         }
         res.status(200);
-        console.log(admin);
+
+        res.send(JSON.stringify(admin))
     }
     catch(error){
         console.log(error);
