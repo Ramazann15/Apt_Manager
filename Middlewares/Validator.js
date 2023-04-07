@@ -41,32 +41,34 @@ exports.validateIncome = async (req,res,next)=>{
     }
 }
 
-exports.Authorization = async (req,res,next)=>{
-
-    const token = req.header('Authorization')
-
-    if(!token){
-        res.status(400)
-        res.send("Bad requirest 400 ")
-        return
+exports.Authorization = async (req, res, next) => {
+    const token = req.header("Authorization");
+    console.log(token);
+  
+    if (!token) {
+      res.status(400).send("Bad request");
+      return; // Fonksiyondan erken çıkın
     }
-    
-    let decompileToken
-    jwt.verify(token.split(" ")[1],process.env.SECRET_KEY, function(err, decoded){
-        if (err) throw new Error(err)
-        decompileToken = decoded
-    } )
-
-    const result = await Admin.find({ Name: decompileToken.Name }).select({ "Name": 1, "_id": 0 })
-    
-    // if(result == 0){
-    //     res.status(401)
-    //     res.redirect("/login")
-    //     next()
-    // }
-
-    global.name = result[0].Name
-
+  
+    let decompileToken;
+    try {
+      jwt.verify(token.split(" ")[1], process.env.SECRET_KEY, function (err, decoded) {
+        if (err) throw new Error(err);
+        decompileToken = decoded;
+      });
+    } catch (error) {
+      res.status(400).send("Bad request ");
+      return; // Fonksiyondan erken çıkın
+    }
+  
+    if (!decompileToken) {
+      res.status(400).send("Bad request");
+      return; // Fonksiyondan erken çıkın
+    }
+  
+    const result = await Admin.find({ Name: decompileToken.Name }).select({ Name: 1, _id: 0 });
+  
+    global.name = result[0].Name;
+  
     next();
-
-}
+  };
