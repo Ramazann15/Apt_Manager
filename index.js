@@ -17,7 +17,7 @@ const Cron = require("./Cron")
 const app = express();
 
 
-DatabaseConnect.connectDatabase();
+
 
 
 app.use(express.json());
@@ -41,7 +41,10 @@ app.use("/getPDF",validator.Authorization,GetPDFRouter)
 
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server run On port ${port}`);
-});
+DatabaseConnect.connectDatabase().then(()=>{
+    app.listen(port, () => {
+        console.log(`Server run On port ${port}`);
+      });
+})
+
 
