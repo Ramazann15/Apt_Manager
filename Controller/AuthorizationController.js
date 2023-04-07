@@ -6,22 +6,35 @@ exports.Login = async (req,res)=>{
 
     try{
         const admin = await Admin.findOne({Name : req.body.Name});
-        if(admin){
-            bcrypt.compare(req.body.password,admin.password,(err, same)=>{
+      
+     
+        if(!admin){
+            res.status(404);
+            res.send("nope")
+            return
+        }
+
+        console.log("Hello")
+        bcrypt.compare(req.body.password,admin.password,(err, same)=>{
+            console.log("Hello")
+            console.log(same)
                 if(same){
                     const key = process.env.SECRET_KEY
                     const token = jwt.sign({Name :  admin.Name},key,{ expiresIn: '31536000000' })
-                    res.status(200).header('Authorization', `${token}`).send("ok");
-                    return
+                    res.send(JSON.stringify(token))
+     
+                    console.log("Hello")
+                    
+                }
+                if(!same){
+                    res.send("password noting match")
                 }
                 if(err){
                     console.log(err)
                 }
             })
-        }
-        res.status(200);
-
-        res.send(JSON.stringify(admin))
+        
+       
     }
     catch(error){
         console.log(error);

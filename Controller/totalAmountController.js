@@ -40,7 +40,6 @@ exports.getaccumulating =  async(req,res)=>{
 
 exports.getTotalOfYear = async(req,res)=>{
     const amount  = await YearTotal.findOne({}).select({"_id":0})
-    console.log(amount)
     res.send(JSON.stringify(amount) );
     res.status(200)
 }

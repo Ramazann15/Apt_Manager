@@ -15,7 +15,7 @@ exports.addIncome = async (req,res)=>{
             }
         ]
     }
-    console.log(lastmonthIncome)
+
     //gelen veriler db ye eklendi
     const income = await Income.create(
         {
