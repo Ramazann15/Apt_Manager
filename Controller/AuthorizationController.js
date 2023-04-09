@@ -27,7 +27,7 @@ exports.Login = async (req,res)=>{
                     
                 }
                 if(!same){
-                    res.send("password noting match")
+                    res.send("password noting match").status(404)
                 }
                 if(err){
                     console.log(err)
