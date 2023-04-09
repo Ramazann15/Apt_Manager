@@ -47,7 +47,7 @@ exports.Authorization = async (req, res, next) => {
   
     if (!token) {
       res.status(400).send("Bad request");
-      return; // Fonksiyondan erken çıkın
+      return; 
     }
   
     let decompileToken;
@@ -58,12 +58,12 @@ exports.Authorization = async (req, res, next) => {
       });
     } catch (error) {
       res.status(400).send("Bad request ");
-      return; // Fonksiyondan erken çıkın
+      return; 
     }
   
     if (!decompileToken) {
       res.status(400).send("Bad request");
-      return; // Fonksiyondan erken çıkın
+      return; 
     }
   
     const result = await Admin.find({ Name: decompileToken.Name }).select({ Name: 1, _id: 0 });
