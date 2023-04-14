@@ -46,7 +46,7 @@ exports.Authorization = async (req, res, next) => {
     console.log(token);
   
     if (!token) {
-      res.status(400).send("Bad request");
+      res.status(400).send(" token not found");
       return; 
     }
   
@@ -57,12 +57,12 @@ exports.Authorization = async (req, res, next) => {
         decompileToken = decoded;
       });
     } catch (error) {
-      res.status(400).send("Bad request ");
+      res.status(400).send("invalid token ");
       return; 
     }
   
     if (!decompileToken) {
-      res.status(400).send("Bad request");
+      res.status(400).send("token  decompile error");
       return; 
     }
   
