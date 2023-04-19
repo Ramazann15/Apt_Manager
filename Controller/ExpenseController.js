@@ -11,7 +11,7 @@ exports.addExpense =async  (req,res)=>{
             electricity_bill : req.body.electricity_bill,
             elevator_maintenance : req.body.elevator_maintenance,
             total : req.body.total,
-            ExpenseMonth : req.body.ExpenseMonth,
+            ExpenseMonth : req.body.expenseMonth,
             amount_collected : req.body.amount_collected,
             date: now,
             extra_expenses : req.body.extra_expenses
