@@ -10,8 +10,8 @@ const Person = require("../Model/Person");
 exports.createPdf = async (req,res)=>{
   
     const date = new Date();
-    const getAmount = await Income.find({bringerMonth : req.body.date}).select({ "_id":0})
-    const getExpense = await Expense.find({ExpenseMonth :req.body.date}).select({"_id":0})
+    const getAmount = await Income.find({bringerMonth : req.params.slug}).select({ "_id":0})
+    const getExpense = await Expense.find({ExpenseMonth :req.params.slug}).select({"_id":0})
     const getPerson = await Person.find({}).select({"_id":0})
 
 
@@ -54,12 +54,12 @@ exports.createPdf = async (req,res)=>{
     const doc = new PDFDocument();
 
     //set PDFs path 
-     doc.pipe(fs.createWriteStream(`./PDF/${req.body.date}-output.pdf`));
+     doc.pipe(fs.createWriteStream(`./PDF/${req.params.slug}-output.pdf`));
 
     //write date 
     doc.fontSize(16)
     doc.font("Helvetica-Bold").text('Tarih : ', 410, 39);
-    doc.font("Helvetica").text(`${req.body.date}`, 458, 39);
+    doc.font("Helvetica").text(`${req.params.slug}`, 458, 39);
     
     // add logo
     doc.font("Helvetica-Bold").fontSize(25).text("Apt-Manager",24,32)
