@@ -191,11 +191,7 @@ exports.createPdf = async (req,res)=>{
   doc.end();
 
 
-  res.setHeader('Content-Type', 'application/pdf');
-
-  doc.pipe(res)
-
-  // res.sendFile(`${req.body.date}-output.pdf`,{ root: "./PDF/" })
+  res.send("Succes")
   
   res.status(200)
     
