@@ -191,9 +191,7 @@ exports.createPdf = async (req,res)=>{
   doc.end();
 
 
-  res.send("Succes")
-  
-  res.status(200)
+  res.redirect(301,`/getPDF/${req.params.slug}`)
     
 
 }
