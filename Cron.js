@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-
+const fs = require('fs');
 
 const Person = require("./Model/Person");
 const Income = require("./Model/Income")
@@ -87,7 +87,14 @@ async function  startCronJob() {
       
     )
     }
+    const path = `${__dirname}/../PDF/`
+    const files = fs.readdirSync( path);
+    for (const file of files){
+      fs.unlinkSync(path + file);
+      console.log("delte" + file) 
+    }
   
+    console.log(files)
     console.log(those_who_do_not_pay)
 
     console.log('Cron job is running...');
