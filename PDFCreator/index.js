@@ -16,7 +16,7 @@ exports.createPdf = async (req,res)=>{
 
 
     //Is the value empty?
-    if(getAmount.length == 0 || getExpense.length == 0){
+    if(getExpense.length == 0){
       res.status(204)
       res.send("No content")
       return
