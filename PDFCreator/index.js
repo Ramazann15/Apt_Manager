@@ -53,8 +53,7 @@ exports.createPdf = async (req,res)=>{
     //start create PDF
     const doc = new PDFDocument();
 
-    //set PDFs path 
-     doc.pipe(fs.createWriteStream(`./PDF/${req.params.slug}-output.pdf`));
+  
 
     //write date 
     doc.fontSize(16)
@@ -188,10 +187,10 @@ exports.createPdf = async (req,res)=>{
   //write document create time
   doc.fontSize(14).font("Helvetica").text(`Bu belge  ${date.toLocaleString()}  tarihinde olusturulmustur. `, 24, 580);
 
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename="example.pdf"');
+  doc.pipe(res);
   doc.end();
-
-
-  res.redirect(301,`/getPDF/${req.params.slug}`)
     
 
 }
