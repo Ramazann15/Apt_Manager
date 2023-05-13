@@ -32,3 +32,15 @@ exports.editPerson = async (req,res)=>{
         console.log(error);
     }
 }
+
+exports.getPerson  = async (req,res)=>{
+    try{
+        const person = await Person.find();
+
+        res.send(JSON.stringify(person))
+        res.status(200)
+    }
+    catch(error){
+        console.log(error);
+    }
+}
