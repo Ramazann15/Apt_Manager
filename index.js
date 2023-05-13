@@ -35,7 +35,7 @@ app.get("/",(req,res)=>{
 app.use("/auth",AuthorizationRoter)
 app.use("/person",validator.Authorization,PersonRouter);
 app.use("/expense",validator.Authorization,validator.validateExpense,ExpenseRouter);
-app.use("/income",validator.Authorization,validator.validateIncome,IncomeRouter);
+app.use("/income",validator.Authorization,IncomeRouter);
 app.use("/totalamount",validator.Authorization,TotalAmountController);
 app.use("/lastest",validator.Authorization,LastestRouter);
 app.use("/getPDF",validator.Authorization,GetPDFRouter)
